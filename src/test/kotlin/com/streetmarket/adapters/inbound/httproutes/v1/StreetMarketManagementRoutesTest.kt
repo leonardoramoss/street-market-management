@@ -2,6 +2,7 @@ package com.streetmarket.adapters.inbound.httproutes.v1
 
 import com.streetmarket.configuration.IntegrationTest
 import com.streetmarket.configuration.JsonFixture.Companion.loadJsonFile
+import com.streetmarket.configuration.database.DatabaseFixture
 import com.streetmarket.module
 import io.ktor.application.Application
 import io.ktor.http.HttpStatusCode.Companion.BadRequest
@@ -65,6 +66,7 @@ internal class StreetMarketManagementRoutesTest : IntegrationTest(Application::m
         val json = loadJsonFile("mock/mock_replace_streetmarket_$streetMarketRegister.json")
 
         put("$managementEndpoint/$streetMarketRegister", json) {
+
             assertAll(
                 { assertEquals(OK, status()) },
                 { assertDatabase(fromClauseStreetMarket, "replaced_street_market_$streetMarketRegister.xml") },

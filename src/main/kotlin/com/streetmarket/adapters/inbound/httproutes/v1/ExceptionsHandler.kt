@@ -1,5 +1,6 @@
 package com.streetmarket.adapters.inbound.httproutes.v1
 
+import com.fasterxml.jackson.module.kotlin.MissingKotlinParameterException
 import com.streetmarket.core.exceptions.StreetMarketException
 import com.streetmarket.core.exceptions.StreetMarketException.StreetMarketNotFoundException
 import com.streetmarket.core.exceptions.StreetMarketException.StreetMarketStateException
@@ -10,12 +11,29 @@ import io.ktor.application.install
 import io.ktor.features.StatusPages
 import io.ktor.http.HttpStatusCode
 import io.ktor.response.respond
+import io.ktor.util.error
 import org.jetbrains.exposed.exceptions.ExposedSQLException
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 fun Application.handleHttpExceptions() {
     install(StatusPages) {
+
+        exception<MissingKotlinParameterException> {
+            val field = it.message
+                ?.substringAfterLast("[")
+                ?.substringBefore("]")
+                ?.replace("\"", "'")
+
+            environment.log.error("Request error: $it")
+
+            if (field != null) {
+                call.respondFailure(HttpStatusCode.BadRequest, StreetMarketStateException("field $field not found"))
+            } else {
+                call.respondFailure(HttpStatusCode.BadRequest, it)
+            }
+        }
+
         exception<StreetMarketException> {
             when (it) {
                 is StreetMarketNotFoundException -> call.respondFailure(HttpStatusCode.NotFound, it)
@@ -23,10 +41,22 @@ fun Application.handleHttpExceptions() {
             }
         }
 
-        exception<ExposedSQLException> {
+        exception<ExposedSQLException> { exposedSQLException ->
             val duplicateKeyCode = "23505"
-            when (it.sqlState) {
-                duplicateKeyCode -> call.respondFailure(HttpStatusCode.Conflict, it)
+            when (exposedSQLException.sqlState) {
+                duplicateKeyCode -> {
+                    val message =
+                        (exposedSQLException.cause.takeIf { it != null }?.message ?: exposedSQLException.message)
+                            ?.substringAfter("Detail: ")
+                    if (message != null) {
+                        call.respondFailure(HttpStatusCode.Conflict, StreetMarketStateException(message))
+                    } else {
+                        call.respondFailure(HttpStatusCode.Conflict, exposedSQLException)
+                    }
+                }
+                else -> call.respondFailure(
+                    HttpStatusCode.InternalServerError, StreetMarketStateException("InternalServerError")
+                )
             }
         }
     }

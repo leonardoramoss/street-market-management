@@ -81,6 +81,9 @@ tasks.test {
     testLogging {
         events("passed", "skipped", "failed")
     }
+    jacoco {
+        excludes += listOf("com.streetmarket.adapters.inbound.httproutes.v1.ExceptionsHandler*")
+    }
 }
 
 tasks.jacocoTestReport {
@@ -98,7 +101,12 @@ tasks.jacocoTestReport {
 tasks.jacocoTestCoverageVerification {
     violationRules {
         rule {
-            excludes = listOf("*ApplicationKt", "*ConfigurationKt", "KtorConfigurationKt")
+            excludes = listOf(
+                "*ApplicationKt",
+                "*ConfigurationKt",
+                "*Configuration",
+                "**/ExceptionsHandler*"
+            )
 
             enabled = true
 
@@ -111,7 +119,7 @@ tasks.jacocoTestCoverageVerification {
             limit {
                 counter = "BRANCH"
                 value = "COVEREDRATIO"
-                minimum = ".6".toBigDecimal()
+                minimum = ".5".toBigDecimal()
             }
         }
     }

@@ -1,0 +1,21 @@
+version: '3.7'
+services:
+    database:
+        container_name: database-market
+        image: postgres:12
+        volumes:
+            - ${HOME}/Docker/postgres/market:/var/lib/postgresql/data
+            - ../src/main/resources/schema.sql:/docker-entrypoint-initdb.d/db.changelog-schema.sql
+        env_file:
+            - .env.local
+        environment:
+            POSTGRES_USER: ${MARKET_DATABASE_USER}
+            POSTGRES_PASSWORD: ${MARKET_DATABASE_PASSWORD}
+            POSTGRES_DB: ${MARKET_DATABASE_NAME}
+        ports:
+            - "5432:5432"
+        networks:
+            - market
+networks:
+    market:
+        driver: bridge

@@ -62,7 +62,7 @@ internal class StreetMarketQueryRoutesTest : DatabaseAssertion by DatabaseFixtur
     }
 
     @Test
-    fun teste3() {
+    fun `should show list of all street markets in region5=Leste`() {
 
         executeScript("scripts/data.sql")
 
@@ -81,7 +81,7 @@ internal class StreetMarketQueryRoutesTest : DatabaseAssertion by DatabaseFixtur
     }
 
     @Test
-    fun teste4() {
+    fun `should show list of all street markets in region5=Leste with pagination`() {
 
         executeScript("scripts/data.sql")
 

@@ -26,8 +26,8 @@
                 "landmark": "TV RUA PRETORIA"
             },
             "geolocation": {
-                "lat": 1,
-                "long": 1
+                "lat": -23558733,
+                "long": -46550164
             }
         },
         {
@@ -50,8 +50,8 @@
                 "landmark": "RUA OLIVEIRA GOUVEIA"
             },
             "geolocation": {
-                "lat": 1,
-                "long": 1
+                "lat": -23558733,
+                "long": -46550164
             }
         }
     ]

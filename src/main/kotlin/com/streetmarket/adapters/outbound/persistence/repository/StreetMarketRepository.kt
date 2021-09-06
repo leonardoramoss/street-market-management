@@ -16,7 +16,6 @@ import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.statements.UpdateBuilder
 import org.jetbrains.exposed.sql.transactions.transaction
-import java.math.BigDecimal
 import java.util.UUID
 
 object StreetMarketRepository : Table("street_market"), Repository<StreetMarket, String> {
@@ -28,6 +27,8 @@ object StreetMarketRepository : Table("street_market"), Repository<StreetMarket,
     private val number = varchar("number", 10).nullable()
     private val neighborhood = varchar("neighborhood", 250)
     private val landmark = varchar("landmark", 50).nullable()
+    private val lat = decimal("lat", 10, 0)
+    private val long = decimal("long", 10, 0)
     private val sectorId = long("sector_id").references(CensusRepository.sector, onDelete = ReferenceOption.CASCADE)
 
     override val primaryKey = PrimaryKey(uuid)
@@ -106,8 +107,8 @@ object StreetMarketRepository : Table("street_market"), Repository<StreetMarket,
                 row[landmark]
             ),
             StreetMarket.Geolocation(
-                BigDecimal.ONE,
-                BigDecimal.ONE
+                row[lat],
+                row[long]
             )
         )
     }
@@ -118,6 +119,7 @@ object StreetMarketRepository : Table("street_market"), Repository<StreetMarket,
         sectorId: Long
     ) {
         val address = domain.address
+        val geolocation = domain.geolocation
 
         builder[uuid] = UUID.nameUUIDFromBytes(domain.register.toByteArray())
         builder[register] = domain.register
@@ -126,6 +128,8 @@ object StreetMarketRepository : Table("street_market"), Repository<StreetMarket,
         builder[number] = address.number
         builder[neighborhood] = address.neighborhood
         builder[landmark] = address.landmark
+        builder[lat] = geolocation.lat
+        builder[long] = geolocation.long
         builder[this.sectorId] = sectorId
     }
 }
