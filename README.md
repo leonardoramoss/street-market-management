@@ -14,7 +14,8 @@
 - [koin](https://insert-koin.io/) - Dependencies injection
 
 ## Documentation
-[http://localhost:8080/docs](http://localhost:8080/docs/index.html)
+- Local - [http://localhost:8080/docs](http://localhost:8080/docs/index.html)
+- Production - [https://street-market-management.herokuapp.com/docs](https://street-market-management.herokuapp.com/docs/index.html)
 
 ## Running
 
@@ -44,17 +45,17 @@ If you want to run in another environment, in that same folder after executing t
 ## API
 #### Management endpoints
 
-| Endpoint                  | HTTP Method   | Description                                        | 
-| --------------------------| ------------- | -------------------------------------------------  |
-| `/v1/market`              | POST          | Boarding new street market                         |
-| `/v1/market/{register}`   | PUT           | Replace an existing street market                  |
-| `/v1/market/{register}`   | DELETE        | Remove street market when exists                   |
+| Endpoint                                  | HTTP Method   | Description                                        | 
+| ------------------------------------------| ------------- | -------------------------------------------------  |
+| `{{enviroment}}/v1/market`                | POST          | Boarding new street market                         |
+| `{{enviroment}}/v1/market/{{register}}`   | PUT           | Replace an existing street market                  |
+| `{{enviroment}}/v1/market/{{register}}`   | DELETE        | Remove street market when exists                   |
 
 #### Search endpoints
-| Endpoint      | HTTP Method   | Description                                        | 
-| ------------- | ------------- | -------------------------------------------------  |
-| `/v1/market/{register}`   | GET          | Detail street market |
-| `/v1/market/search`       | GET          | Search street markets |
+| Endpoint      | HTTP Method               | Description                                        | 
+| ------------- | --------------------------| -------------------------------------------------  |
+| `{{enviroment}}/v1/market/{{register}}`   | GET          | Detail street market                |
+| `{{enviroment}}/v1/market/search`         | GET          | Search street markets               |
 
 ## Examples
 
@@ -90,7 +91,7 @@ curl --location --request POST '{{enviroment}}/v1/market' \
 }'
 ```
 
-##### PUT - /v1/market/{register}
+##### PUT - /v1/market/{{register}}
 ```
 curl --location --request PUT '{{enviroment}}/v1/market/4045-2' \
 --header 'Content-Type: application/json' \
@@ -120,12 +121,12 @@ curl --location --request PUT '{{enviroment}}/v1/market/4045-2' \
 }'
 ```
 
-##### DELETE - /v1/market/{register}
+##### DELETE - /v1/market/{{register}}
 ```
 curl --location --request DELETE '{{enviroment}}/v1/market/4041-2'
 ```
 
-##### GET - /v1/market/{register}
+##### GET - /v1/market/{{register}}
 ```
 curl --location --request GET '{{enviroment}}/v1/market/4041-2'
 ```
