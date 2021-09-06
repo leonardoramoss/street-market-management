@@ -1,0 +1,24 @@
+{
+    "register": "4041-2",
+    "name": "VILA FORMOSA",
+    "census": {
+        "district_code": 87,
+        "district": "VILA FORMOSA",
+        "borough_code": 26,
+        "borough": "ARICANDUVA-FORMOSA-CARRAO",
+        "sector": 355030885000091,
+        "weighting_area": 3550308005040,
+        "region5": "Leste",
+        "region8": "Leste 1"
+    },
+    "address": {
+        "street": "RUA MARAGOJIPE",
+        "number": "S/N",
+        "neighborhood": "VL FORMOSA",
+        "landmark": "TV RUA PRETORIA"
+    },
+    "geolocation": {
+        "long": 1,
+        "lat": 1
+    }
+}

@@ -1,0 +1,565 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Street Market Managment",
+        "version": "1.0.0",
+        "contact": {
+            "name": "Leonardo Ramos Santos",
+            "url": "https://github.com/leonardoramoss",
+            "email": "leonardo.ramos@outlook.com.br"
+        },
+        "x-logo": {
+            "url": ""
+        }
+    },
+    "servers": [
+        {
+            "url": "localhost",
+            "description": "LocalServer"
+        }
+    ],
+    "paths": {
+        "/v1/market": {
+            "post": {
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref":"#/components/schemas/StreetMarket"
+                            },
+                            "example": {
+                                "register": "4045-2",
+                                "name": "PRACA SANTA HELENA",
+                                "census": {
+                                    "sector": 355030893000035,
+                                    "weighting_area": 3550308005042,
+                                    "district_code": 95,
+                                    "district": "VILA PRUDENTE",
+                                    "borough_code": 29,
+                                    "borough": "VILA PRUDENTE",
+                                    "region5": "Leste",
+                                    "region8": "Leste 1"
+                                },
+                                "address": {
+                                    "street": "RUA JOSE DOS REIS",
+                                    "number": "909",
+                                    "neighborhood": "VL ZELINA",
+                                    "landmark": "RUA OLIVEIRA GOUVEIA"
+                                },
+                                "geolocation": {
+                                    "lat": -23558733,
+                                    "long": -46550164
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "tags":[
+                    "Management"
+                ],
+                "responses": {
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/StreetMarket"
+                                },
+                                "example": {
+                                    "register": "4045-2",
+                                    "name": "PRACA SANTA HELENA",
+                                    "census": {
+                                        "sector": 355030893000035,
+                                        "weighting_area": 3550308005042,
+                                        "district_code": 95,
+                                        "district": "VILA PRUDENTE",
+                                        "borough_code": 29,
+                                        "borough": "VILA PRUDENTE",
+                                        "region5": "Leste",
+                                        "region8": "Leste 1"
+                                    },
+                                    "address": {
+                                        "street": "RUA JOSE DOS REIS",
+                                        "number": "909",
+                                        "neighborhood": "VL ZELINA",
+                                        "landmark": "RUA OLIVEIRA GOUVEIA"
+                                    },
+                                    "geolocation": {
+                                        "lat": -23558733,
+                                        "long": -46550164
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Created"
+                    },
+                    "409": {
+                        "description": "Already exists Street Market"
+                    }
+                },
+                "operationId": "postRoute",
+                "summary": "Boardind Street Market"
+            }
+        },
+        "/v1/market/{REGISTER}": {
+            "put": {
+                "parameters": [
+                    {
+                        "name": "REGISTER",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref":"#/components/schemas/StreetMarket"
+                            },
+                            "example": {
+                                "register": "4045-2",
+                                "name": "PRACA SANTA HELENA",
+                                "census": {
+                                    "sector": 355030893000035,
+                                    "weighting_area": 3550308005042,
+                                    "district_code": 95,
+                                    "district": "VILA PRUDENTE",
+                                    "borough_code": 29,
+                                    "borough": "VILA PRUDENTE",
+                                    "region5": "Leste",
+                                    "region8": "Leste 1"
+                                },
+                                "address": {
+                                    "street": "RUA JOSE DOS REIS",
+                                    "number": "909",
+                                    "neighborhood": "VL ZELINA",
+                                    "landmark": "RUA OLIVEIRA GOUVEIA"
+                                },
+                                "geolocation": {
+                                    "lat": -23558733,
+                                    "long": -46550164
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "tags": [
+                    "Management"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Street Market replaced"
+                    },
+                    "400": {
+                        "description": "Bad Rqquest"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "operationId": "Replace Street Market",
+                "summary": ""
+            },
+            "delete": {
+                "parameters": [
+                    {
+                        "name": "REGISTER",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Management"
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "operationId": "Remove Street Market",
+                "summary": ""
+            },
+            "get": {
+                "summary": "Detail Street Market",
+                "operationId": "getRoute",
+                "tags": [
+                    "Search"
+                ],
+                "parameters": [
+                    {
+                        "example": "4045-2",
+                        "name": "REGISTER",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/StreetMarket"
+                                },
+                                "example": {
+                                    "register": "4045-2",
+                                    "name": "PRACA SANTA HELENA",
+                                    "census": {
+                                        "sector": 355030893000035,
+                                        "weighting_area": 3550308005042,
+                                        "district_code": 95,
+                                        "district": "VILA PRUDENTE",
+                                        "borough_code": 29,
+                                        "borough": "VILA PRUDENTE",
+                                        "region5": "Leste",
+                                        "region8": "Leste 1"
+                                    },
+                                    "address": {
+                                        "street": "RUA JOSE DOS REIS",
+                                        "number": "909",
+                                        "neighborhood": "VL ZELINA",
+                                        "landmark": "RUA OLIVEIRA GOUVEIA"
+                                    },
+                                    "geolocation": {
+                                        "lat": -23558733,
+                                        "long": -46550164
+                                    }
+                                }
+                            }
+                        },
+
+                        "description": "OK - Street Market detail"
+                    },
+                    "404": {
+                        "description": "Not found - The requested resource is not found"
+                    }
+                }
+            }
+        },
+        "/v1/market/search": {
+            "get": {
+                "tags": [
+                    "Search"
+                ],
+                "parameters": [
+                    {
+                        "example": "Leste",
+                        "name": "region5",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "query"
+                    },
+                    {
+                        "example": "VL FORMOSA",
+                        "name": "neighborhood",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "query"
+                    },
+                    {
+                        "example": "VILA FORMOSA",
+                        "name": "district",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "query"
+                    },
+                    {
+                        "example": "VILA FORMOSA",
+                        "name": "name",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchStreetMarket"
+                                }
+                            }
+                        },
+                        "description": "Default response"
+                    }
+                },
+                "operationId": "Search Street Markets",
+                "summary": "",
+                "description": ""
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "SearchStreetMarket": {
+                "type": "object",
+                "properties": {
+                    "page": {
+                        "type": "integer",
+                        "description": "Page number"
+                    },
+                    "size": {
+                        "type": "integer",
+                        "description": "Total records on page"
+                    },
+                    "total": {
+                        "type": "integer",
+                        "description": "total records found"
+                    },
+                    "filter": {
+                        "type": "object",
+                        "properties": {
+                            "region5": {
+                                "type": "string"
+                            },
+                            "neighborhood": {
+                                "type": "string"
+                            },
+                            "district": {
+                                "type": "string"
+                            },
+                            "name": {
+                                "type": "string"
+                            },
+                            "page": {
+                                "type": "integer"
+                            },
+                            "size": {
+                                "type": "integer"
+                            }
+                        }
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": [
+                            {
+                                "type": "object",
+                                "properties": {
+                                    "register": {
+                                        "type": "string"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "census": {
+                                        "type": "object",
+                                        "properties": {
+                                            "sector": {
+                                                "type": "integer"
+                                            },
+                                            "weighting_area": {
+                                                "type": "integer"
+                                            },
+                                            "district_code": {
+                                                "type": "integer"
+                                            },
+                                            "district": {
+                                                "type": "string"
+                                            },
+                                            "borough_code": {
+                                                "type": "integer"
+                                            },
+                                            "borough": {
+                                                "type": "string"
+                                            },
+                                            "region5": {
+                                                "type": "string"
+                                            },
+                                            "region8": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "required": [
+                                            "sector",
+                                            "weighting_area",
+                                            "district_code",
+                                            "district",
+                                            "borough_code",
+                                            "borough",
+                                            "region5",
+                                            "region8"
+                                        ]
+                                    },
+                                    "address": {
+                                        "type": "object",
+                                        "properties": {
+                                            "street": {
+                                                "type": "string"
+                                            },
+                                            "number": {
+                                                "type": "string"
+                                            },
+                                            "neighborhood": {
+                                                "type": "string"
+                                            },
+                                            "landmark": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "required": [
+                                            "street",
+                                            "number",
+                                            "neighborhood",
+                                            "landmark"
+                                        ]
+                                    },
+                                    "geolocation": {
+                                        "type": "object",
+                                        "properties": {
+                                            "lat": {
+                                                "type": "integer"
+                                            },
+                                            "long": {
+                                                "type": "integer"
+                                            }
+                                        },
+                                        "required": [
+                                            "lat",
+                                            "long"
+                                        ]
+                                    }
+                                },
+                                "required": [
+                                    "register",
+                                    "name",
+                                    "census",
+                                    "address",
+                                    "geolocation"
+                                ]
+                            }
+                        ]
+                    }
+                },
+                "required": [
+                    "page",
+                    "size",
+                    "total",
+                    "filter",
+                    "data"
+                ]
+            },
+            "StreetMarket": {
+                "type": "object",
+                "properties": {
+                    "register": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "census": {
+                        "type": "object",
+                        "properties": {
+                            "sector": {
+                                "type": "integer"
+                            },
+                            "weighting_area": {
+                                "type": "integer"
+                            },
+                            "district_code": {
+                                "type": "integer"
+                            },
+                            "district": {
+                                "type": "string"
+                            },
+                            "borough_code": {
+                                "type": "integer"
+                            },
+                            "borough": {
+                                "type": "string"
+                            },
+                            "region5": {
+                                "type": "string"
+                            },
+                            "region8": {
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "sector",
+                            "weighting_area",
+                            "district_code",
+                            "district",
+                            "borough_code",
+                            "borough",
+                            "region5",
+                            "region8"
+                        ]
+                    },
+                    "address": {
+                        "type": "object",
+                        "properties": {
+                            "street": {
+                                "type": "string"
+                            },
+                            "number": {
+                                "type": "string"
+                            },
+                            "neighborhood": {
+                                "type": "string"
+                            },
+                            "landmark": {
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "street",
+                            "number",
+                            "neighborhood",
+                            "landmark"
+                        ]
+                    },
+                    "geolocation": {
+                        "type": "object",
+                        "properties": {
+                            "lat": {
+                                "type": "integer"
+                            },
+                            "long": {
+                                "type": "integer"
+                            }
+                        },
+                        "required": [
+                            "lat",
+                            "long"
+                        ]
+                    }
+                },
+                "required": [
+                    "register",
+                    "name",
+                    "census",
+                    "address",
+                    "geolocation"
+                ]
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Management",
+            "description": "API Management"
+        },
+        {
+            "name": "Search",
+            "description": "API Search"
+        }
+    ],
+    "security": []
+}
