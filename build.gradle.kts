@@ -7,6 +7,7 @@ val exposedVersion: String by project
 plugins {
     jacoco
     application
+    distribution
     kotlin("jvm") version "1.5.30"
     id("com.github.johnrengelman.shadow") version "7.0.0"
 }
@@ -67,8 +68,8 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-params:5.7.2")
 }
 
-tasks.create("stage") {
-    dependsOn("installDist")
+tasks.build {
+    dependsOn(tasks.installDist)
 }
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
