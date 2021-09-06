@@ -18,13 +18,13 @@
 
 ## Running
 
-####Docker
+#### Docker
 - To run or project stack mounted the following commands:
    ```
    docker-compose build
    docker-compose up
    ```
-####IDE
+#### IDE
 
 - Running only dependencies and start application by IntelliJ
     ```
@@ -50,9 +50,9 @@ The application will start at http://localhost:8080/
 | `/v1/market/{register}`   | GET          | Detail street market |
 | `/v1/market/search`       | GET          | Search street markets |
 
-##Examples
+## Examples
 
-#####POST - /v1/market
+##### POST - /v1/market
 
 ```
 curl --location --request POST '{{enviroment}}/v1/market' \
@@ -84,7 +84,7 @@ curl --location --request POST '{{enviroment}}/v1/market' \
 }'
 ```
 
-#####PUT - /v1/market/{register}
+##### PUT - /v1/market/{register}
 ```
 curl --location --request PUT '{{enviroment}}/v1/market/4045-2' \
 --header 'Content-Type: application/json' \
@@ -114,12 +114,12 @@ curl --location --request PUT '{{enviroment}}/v1/market/4045-2' \
 }'
 ```
 
-#####DELETE - /v1/market/{register}
+##### DELETE - /v1/market/{register}
 ```
 curl --location --request DELETE '{{enviroment}}/v1/market/4041-2'
 ```
 
-#####GET - /v1/market/{register}
+##### GET - /v1/market/{register}
 ```
 curl --location --request GET '{{enviroment}}/v1/market/4041-2'
 ```
@@ -151,12 +151,12 @@ curl --location --request GET '{{enviroment}}/v1/market/4041-2'
     }
 }
 ```
-#####GET - /v1/market/search
+##### GET - /v1/market/search
 ```
 curl --location --request GET '{{enviroment}}/v1/market/search?region5=Leste&size=10&page=0&neighborhood=VL FORMOSA&district=VILA FORMOSA&name=VILA FORMOSA'
 ```
 
-####Response
+#### Response
 ```json
 {
     "page": 0,
