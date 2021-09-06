@@ -44,8 +44,6 @@ dependencies {
     implementation("ch.qos.logback.contrib:logback-json-classic:0.1.5")
     implementation("net.logstash.logback:logstash-logback-encoder:6.6")
 
-    implementation("com.github.doyaaaaaken:kotlin-csv-jvm:0.15.2")
-
     implementation("io.insert-koin:koin-core:$koinVersion")
     implementation("io.insert-koin:koin-ktor:$koinVersion")
 
@@ -67,6 +65,10 @@ dependencies {
     testImplementation(kotlin("test-junit5:$kotlinVersion"))
     testImplementation("org.junit.jupiter:junit-jupiter-engine:5.7.2")
     testImplementation("org.junit.jupiter:junit-jupiter-params:5.7.2")
+}
+
+tasks.create("stage") {
+    dependsOn("installDist")
 }
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
