@@ -44,7 +44,7 @@ dependencies {
     implementation("ch.qos.logback.contrib:logback-json-classic:0.1.5")
     implementation("net.logstash.logback:logstash-logback-encoder:6.6")
 
-    implementation("org.valiktor:valiktor-core:0.12.0")
+    implementation("com.github.doyaaaaaken:kotlin-csv-jvm:0.15.2")
 
     implementation("io.insert-koin:koin-core:$koinVersion")
     implementation("io.insert-koin:koin-ktor:$koinVersion")
@@ -81,9 +81,6 @@ tasks.test {
     testLogging {
         events("passed", "skipped", "failed")
     }
-    jacoco {
-        excludes += listOf("com.streetmarket.adapters.inbound.httproutes.v1.ExceptionsHandler*")
-    }
 }
 
 tasks.jacocoTestReport {
@@ -101,14 +98,20 @@ tasks.jacocoTestReport {
 tasks.jacocoTestCoverageVerification {
     violationRules {
         rule {
-            excludes = listOf(
-                "*ApplicationKt",
-                "*ConfigurationKt",
-                "*Configuration",
-                "**/ExceptionsHandler*"
-            )
-
+            limit {
+                minimum = "0.80".toBigDecimal()
+            }
+        }
+        rule {
             enabled = true
+
+            element = "CLASS"
+
+            excludes = listOf(
+                "*Application*",
+                "*Configuration*",
+                "*Exceptions*"
+            )
 
             limit {
                 counter = "LINE"
@@ -119,7 +122,13 @@ tasks.jacocoTestCoverageVerification {
             limit {
                 counter = "BRANCH"
                 value = "COVEREDRATIO"
-                minimum = ".5".toBigDecimal()
+                minimum = "0.80".toBigDecimal()
+            }
+
+            limit {
+                counter = "LINE"
+                value = "TOTALCOUNT"
+                maximum = "200".toBigDecimal()
             }
         }
     }

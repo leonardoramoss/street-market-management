@@ -2,6 +2,7 @@ package com.streetmarket.adapters.inbound.httproutes.v1
 
 import com.fasterxml.jackson.module.kotlin.MissingKotlinParameterException
 import com.streetmarket.core.exceptions.StreetMarketException
+import com.streetmarket.core.exceptions.StreetMarketException.StreetMarketAlreadyExistsException
 import com.streetmarket.core.exceptions.StreetMarketException.StreetMarketNotFoundException
 import com.streetmarket.core.exceptions.StreetMarketException.StreetMarketStateException
 import io.ktor.application.Application
@@ -38,6 +39,7 @@ fun Application.handleHttpExceptions() {
             when (it) {
                 is StreetMarketNotFoundException -> call.respondFailure(HttpStatusCode.NotFound, it)
                 is StreetMarketStateException -> call.respondFailure(HttpStatusCode.BadRequest, it)
+                is StreetMarketAlreadyExistsException -> call.respondFailure(HttpStatusCode.Conflict, it)
             }
         }
 

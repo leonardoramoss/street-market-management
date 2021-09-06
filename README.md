@@ -35,6 +35,12 @@ See: https://plugins.jetbrains.com/plugin/7861-envfile
 
 The application will start at http://localhost:8080/
 
+## Import data
+
+In the `dataset` folder just run the `import.sh` script to do the local loading (Docker).
+
+If you want to run in another environment, in that same folder after executing the script, an SQL script `streetmarket.sql will be generated, just run in any other environment
+
 ## API
 #### Management endpoints
 

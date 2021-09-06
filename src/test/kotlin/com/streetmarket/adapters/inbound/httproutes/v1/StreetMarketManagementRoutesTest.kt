@@ -21,7 +21,6 @@ import kotlin.test.assertEquals
 internal class StreetMarketManagementRoutesTest : IntegrationTest(Application::module) {
 
     private val fromClauseStreetMarket = "MARKET.STREET_MARKET"
-    private val fromClauseCensus = "MARKET.CENSUS"
 
     private val managementEndpoint = "/v1/market"
 
@@ -32,11 +31,13 @@ internal class StreetMarketManagementRoutesTest : IntegrationTest(Application::m
 
     @Test
     fun `should boarding new street market`() {
-        post(managementEndpoint, loadJsonFile("mock/mock_streetmarket_4041-2.json")) {
+
+        val streetMarketRegister = "4041-2"
+
+        post(managementEndpoint, loadJsonFile("mock/mock_streetmarket_$streetMarketRegister.json")) {
             assertAll(
                 { assertEquals(Created, status()) },
-                { assertDatabase(fromClauseStreetMarket, "street_market_4041-2.xml") },
-                { assertDatabase(fromClauseCensus, "street_market_census_4041-2.xml") }
+                { assertDatabase(fromClauseStreetMarket, "street_market_$streetMarketRegister.xml") }
             )
         }
     }
@@ -51,8 +52,7 @@ internal class StreetMarketManagementRoutesTest : IntegrationTest(Application::m
         post(managementEndpoint, loadJsonFile("mock/mock_streetmarket_$streetMarketRegister.json")) {
             assertAll(
                 { assertEquals(Conflict, status()) },
-                { assertDatabase(fromClauseStreetMarket, "street_market_$streetMarketRegister.xml") },
-                { assertDatabase(fromClauseCensus, "street_market_census_$streetMarketRegister.xml") }
+                { assertDatabase(fromClauseStreetMarket, "street_market_$streetMarketRegister.xml") }
             )
         }
     }
@@ -69,8 +69,7 @@ internal class StreetMarketManagementRoutesTest : IntegrationTest(Application::m
 
             assertAll(
                 { assertEquals(OK, status()) },
-                { assertDatabase(fromClauseStreetMarket, "replaced_street_market_$streetMarketRegister.xml") },
-                { assertDatabase(fromClauseCensus, "replaced_street_market_census_$streetMarketRegister.xml") }
+                { assertDatabase(fromClauseStreetMarket, "replaced_street_market_$streetMarketRegister.xml") }
             )
         }
     }
@@ -88,8 +87,7 @@ internal class StreetMarketManagementRoutesTest : IntegrationTest(Application::m
         put("$managementEndpoint/$replaceStreetMarketRegister", json) {
             assertAll(
                 { assertEquals(BadRequest, status()) },
-                { assertDatabase(fromClauseStreetMarket, "street_market_$streetMarketRegister.xml") },
-                { assertDatabase(fromClauseCensus, "street_market_census_$streetMarketRegister.xml") }
+                { assertDatabase(fromClauseStreetMarket, "street_market_$streetMarketRegister.xml") }
             )
         }
     }
@@ -118,8 +116,7 @@ internal class StreetMarketManagementRoutesTest : IntegrationTest(Application::m
         delete("$managementEndpoint/$streetMarketRegister") {
             assertAll(
                 { assertEquals(NoContent, status()) },
-                { assertDatabase(fromClauseStreetMarket, "street_market_empty.xml") },
-                { assertDatabase(fromClauseCensus, "street_market_census_empty.xml") }
+                { assertDatabase(fromClauseStreetMarket, "street_market_empty.xml") }
             )
         }
     }
