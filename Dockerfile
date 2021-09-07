@@ -1,24 +1,31 @@
-FROM gradle:jdk11-hotspot AS build
-WORKDIR /cache
+FROM gradle:jdk11-hotspot AS cache
 
-COPY build.gradle.kts .
-COPY settings.gradle.kts .
-COPY gradle.properties .
+WORKDIR /build
 
-RUN gradle clean build --no-daemon > /dev/null 2>&1 || true
+COPY build.gradle.kts settings.gradle.kts gradle.properties ./
 
-COPY ./src /cache/src
+ENV GRADLE_USER_HOME /cache
 
-RUN gradle clean shadowJar --no-daemon
+RUN gradle --no-daemon build --stacktrace
+
+FROM gradle:jdk11-hotspot AS builder
+
+RUN gradle --version && java -version
+
+WORKDIR /build
+
+COPY --from=cache /cache /home/gradle/.gradle
+
+COPY build.gradle.kts settings.gradle.kts gradle.properties ./
+COPY src src
+
+RUN gradle clean build --no-daemon
 
 #
 # RELEASE image
 #
 FROM adoptopenjdk/openjdk11:jre-11.0.11_9-alpine AS release
 
-COPY --from=build /cache/build/libs/*all.jar /service.jar
+COPY --from=builder /build/build/libs/*all.jar /service.jar
 
-COPY docker-entrypoint.sh /
-RUN apk add --no-cache curl && \
-    chmod +x /docker-entrypoint.sh
-ENTRYPOINT ["/docker-entrypoint.sh"]
+ENTRYPOINT ["java", "-jar", "/service.jar"]

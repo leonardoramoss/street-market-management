@@ -1,4 +1,4 @@
-package com.streetmarket.adapters.inbound.httproutes.v1
+package com.streetmarket.adapters.inbound.httproutes.v1.exceptions
 
 import com.fasterxml.jackson.module.kotlin.MissingKotlinParameterException
 import com.streetmarket.core.exceptions.StreetMarketException
@@ -12,7 +12,6 @@ import io.ktor.application.install
 import io.ktor.features.StatusPages
 import io.ktor.http.HttpStatusCode
 import io.ktor.response.respond
-import io.ktor.util.error
 import org.jetbrains.exposed.exceptions.ExposedSQLException
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter

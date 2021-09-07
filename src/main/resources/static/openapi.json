@@ -1,7 +1,7 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "Street Market Managment",
+        "title": "Street Market Management",
         "version": "1.0.0",
         "contact": {
             "name": "Leonardo Ramos Santos",
@@ -98,7 +98,7 @@
                     }
                 },
                 "operationId": "postRoute",
-                "summary": "Boardind Street Market"
+                "summary": "Boarding Street Market"
             }
         },
         "/v1/market/{REGISTER}": {
@@ -155,7 +155,7 @@
                         "description": "Street Market replaced"
                     },
                     "400": {
-                        "description": "Bad Rqquest"
+                        "description": "Bad Request"
                     },
                     "404": {
                         "description": "Not Found"

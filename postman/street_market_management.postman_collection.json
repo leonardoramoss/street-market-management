@@ -1,0 +1,147 @@
+{
+	"info": {
+		"_postman_id": "a5845662-1c43-48b8-9633-8f3e09184986",
+		"name": "Street Market Management",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Boarding Street Market",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"register\": \"4045-2\",\n    \"name\": \"PRACA SANTA HELENA\",\n    \"census\": {\n        \"sector\": \"355030893000034\",\n        \"weighting_area\": 3550308005042,\n        \"district_code\": 95,\n        \"district\": \"VILA PRUDENTE\",\n        \"borough_code\": 29,\n        \"borough\": \"VILA PRUDENTE\",\n        \"region5\": \"Leste\",\n        \"region8\": \"Leste 1\"\n    },\n    \"address\": {\n        \"street\": \"RUA JOSE DOS REIS\",\n        \"number\": \"909\",\n        \"neighborhood\": \"VL ZELINA\",\n        \"landmark\": \"RUA OLIVEIRA GOUVEIA\"\n    },\n    \"geolocation\": {\n        \"lat\": -23558733,\n        \"long\": -46550164\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{environment}}/v1/market",
+					"host": [
+						"{{environment}}"
+					],
+					"path": [
+						"v1",
+						"market"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Detail Street Market",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{environment}}/v1/market/{{register}}",
+					"host": [
+						"{{environment}}"
+					],
+					"path": [
+						"v1",
+						"market",
+						"{{register}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Replace Street Market",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"register\": \"4045-2\",\n    \"name\": \"VILA FORMOSA\",\n    \"census\": {\n        \"sector\": 355030885000091,\n        \"weighting_area\": 3550308005040,\n        \"district_code\": 87,\n        \"district\": \"VILA FORMOSA\",\n        \"borough_code\": 26,\n        \"borough\": \"ARICANDUVA-FORMOSA-CARRAO\",\n        \"region5\": \"Leste\",\n        \"region8\": \"Leste 1\"\n    },\n    \"address\": {\n        \"street\": \"RUA MARAGOJIPE\",\n        \"number\": \"S/N\",\n        \"neighborhood\": \"VL FORMOSA\",\n        \"landmark\": \"TV RUA PRETORIA\"\n    },\n    \"geolocation\": {\n        \"lat\": 1,\n        \"long\": 1\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{environment}}/v1/market/{{register}}",
+					"host": [
+						"{{environment}}"
+					],
+					"path": [
+						"v1",
+						"market",
+						"{{register}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search Street Markets",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{environment}}/v1/market/search?region5=Leste&size=10&page=0&neighborhood=VL FORMOSA&district=VILA FORMOSA&name=VILA FORMOSA",
+					"host": [
+						"{{environment}}"
+					],
+					"path": [
+						"v1",
+						"market",
+						"search"
+					],
+					"query": [
+						{
+							"key": "region5",
+							"value": "Leste"
+						},
+						{
+							"key": "size",
+							"value": "10"
+						},
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "neighborhood",
+							"value": "VL FORMOSA"
+						},
+						{
+							"key": "district",
+							"value": "VILA FORMOSA"
+						},
+						{
+							"key": "name",
+							"value": "VILA FORMOSA"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Remove Street Market",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{environment}}/v1/market/{{register}}",
+					"host": [
+						"{{environment}}"
+					],
+					"path": [
+						"v1",
+						"market",
+						"{{register}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

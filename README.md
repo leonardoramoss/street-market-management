@@ -22,14 +22,14 @@
 #### Docker
 - To run or project stack mounted the following commands:
    ```
-   docker-compose build
-   docker-compose up
+   docker-compose -f docker/docker-compose.yml build
+   docker-compose -f docker/docker-compose.yml up
    ```
 #### IDE
 
 - Running only dependencies and start application by IntelliJ
     ```
-    docker-compose -f docker-compose-local.yml
+    docker-compose -f docker/docker-compose-local.yml
     ```
   Make sure the environment file .env.local is configured in the IDE.
 See: https://plugins.jetbrains.com/plugin/7861-envfile
@@ -47,22 +47,22 @@ If you want to run in another environment, in that same folder after executing t
 
 | Endpoint                                  | HTTP Method   | Description                                        | 
 | ------------------------------------------| ------------- | -------------------------------------------------  |
-| `{{enviroment}}/v1/market`                | POST          | Boarding new street market                         |
-| `{{enviroment}}/v1/market/{{register}}`   | PUT           | Replace an existing street market                  |
-| `{{enviroment}}/v1/market/{{register}}`   | DELETE        | Remove street market when exists                   |
+| `{{environment}}/v1/market`                | POST          | Boarding new street market                         |
+| `{{environment}}/v1/market/{{register}}`   | PUT           | Replace an existing street market                  |
+| `{{environment}}/v1/market/{{register}}`   | DELETE        | Remove street market when exists                   |
 
 #### Search endpoints
 | Endpoint      | HTTP Method               | Description                                        | 
 | ------------- | --------------------------| -------------------------------------------------  |
-| `{{enviroment}}/v1/market/{{register}}`   | GET          | Detail street market                |
-| `{{enviroment}}/v1/market/search`         | GET          | Search street markets               |
+| `{{environment}}/v1/market/{{register}}`   | GET          | Detail street market                |
+| `{{environment}}/v1/market/search`         | GET          | Search street markets               |
 
 ## Examples
 
-##### POST - /v1/market
+##### POST - {{environment}}/v1/market
 
 ```
-curl --location --request POST '{{enviroment}}/v1/market' \
+curl --location --request POST '{{environment}}/v1/market' \
 --header 'Content-Type: application/json' \
 --data-raw 
 '{
@@ -91,9 +91,9 @@ curl --location --request POST '{{enviroment}}/v1/market' \
 }'
 ```
 
-##### PUT - /v1/market/{{register}}
+##### PUT - {{environment}}/v1/market/{{register}}
 ```
-curl --location --request PUT '{{enviroment}}/v1/market/4045-2' \
+curl --location --request PUT '{{environment}}/v1/market/4045-2' \
 --header 'Content-Type: application/json' \
 --data-raw '{
     "register": "4045-2",
@@ -121,14 +121,14 @@ curl --location --request PUT '{{enviroment}}/v1/market/4045-2' \
 }'
 ```
 
-##### DELETE - /v1/market/{{register}}
+##### DELETE - {{environment}}/v1/market/{{register}}
 ```
-curl --location --request DELETE '{{enviroment}}/v1/market/4041-2'
+curl --location --request DELETE '{{environment}}/v1/market/4041-2'
 ```
 
-##### GET - /v1/market/{{register}}
+##### GET - {{environment}}/v1/market/{{register}}
 ```
-curl --location --request GET '{{enviroment}}/v1/market/4041-2'
+curl --location --request GET '{{environment}}/v1/market/4041-2'
 ```
 
 #### Response
@@ -158,9 +158,9 @@ curl --location --request GET '{{enviroment}}/v1/market/4041-2'
     }
 }
 ```
-##### GET - /v1/market/search
+##### GET - {{environment}}/v1/market/search
 ```
-curl --location --request GET '{{enviroment}}/v1/market/search?region5=Leste&size=10&page=0&neighborhood=VL FORMOSA&district=VILA FORMOSA&name=VILA FORMOSA'
+curl --location --request GET '{{environment}}/v1/market/search?region5=Leste&size=10&page=0&neighborhood=VL FORMOSA&district=VILA FORMOSA&name=VILA FORMOSA'
 ```
 
 #### Response

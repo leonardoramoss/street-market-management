@@ -23,11 +23,12 @@ services:
         image: street-market:latest
         command: sh -c './wait-for database:5432 -- echo "Database is ready"'
         build:
-            context: ./
+            context: ..
             dockerfile: Dockerfile
         env_file:
             - .env
         environment:
+            DEV: ${DEV}
             MARKET_DATABASE_USER: ${MARKET_DATABASE_USER}
             MARKET_DATABASE_PASSWORD: ${MARKET_DATABASE_PASSWORD}
             MARKET_DATABASE_NAME: ${MARKET_DATABASE_NAME}

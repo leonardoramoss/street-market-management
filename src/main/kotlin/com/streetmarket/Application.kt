@@ -1,6 +1,6 @@
 package com.streetmarket
 
-import com.streetmarket.adapters.inbound.httproutes.v1.handleHttpExceptions
+import com.streetmarket.adapters.inbound.httproutes.v1.exceptions.handleHttpExceptions
 import com.streetmarket.adapters.inbound.httproutes.v1.streetMarketManagementRoutes
 import com.streetmarket.adapters.inbound.httproutes.v1.streetMarketQueryRoutes
 import com.streetmarket.configuration.koinConfiguration
