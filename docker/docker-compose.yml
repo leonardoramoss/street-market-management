@@ -21,7 +21,7 @@ services:
         hostname: street-market
         container_name: street-market
         image: street-market:latest
-        command: sh -c './wait-for database:5432 -- echo "Database is ready"'
+        restart: always
         build:
             context: ..
             dockerfile: Dockerfile
